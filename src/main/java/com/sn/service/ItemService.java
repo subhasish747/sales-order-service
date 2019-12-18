@@ -1,6 +1,7 @@
 package com.sn.service;
 
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sn.vo.ItemVO;
 
 @RibbonClient(name="249071-item-service")
+@FeignClient(name="249071-item-service")
 public interface ItemService  {
 	
 	 
