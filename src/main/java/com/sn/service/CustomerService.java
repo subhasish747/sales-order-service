@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sn.dbo.CustomerSOS;
-import com.sn.listener.RecieverService;
 import com.sn.repository.CustomerRepository;
 
 @Service
@@ -27,14 +26,14 @@ public class CustomerService implements ICustomerService {
 
 	@Override
 	public List<CustomerSOS> getAllCustSOS() {
-		log.info("getAllCustSOS--------start-------------");
+		log.info("getAllCustSOS--------start **-------------");
 		return customerRepository.findAll();
 	}
 	
 	
 	@Override
 	public CustomerSOS getCustSOS(Long id) {
-		log.info("getAllCustSOS--------start-------------");
+		log.info("getAllCustSOS-  @@@@@  start-------------{} ",id);
 		return customerRepository.findById(id).orElse(new CustomerSOS());
 	}
 

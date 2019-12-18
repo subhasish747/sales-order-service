@@ -1,40 +1,17 @@
 package com.sn.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sn.vo.ItemVO;
 
-@Service
-public class ItemService implements IItemService {
+@RibbonClient(name="249071-item-service")
+public interface ItemService  {
 	
-	private 
-
-	@Autowired
-	RestTemplate restTemplate;
-
-	@LoadBalanced
-	@Bean
-	RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
-
-	@Override
-	public ItemVO getItems(String itemname) {
-		ItemVO item;
-		try {
-			item = this.restTemplate
-					.getForObject("https://249071-item-service/service2/items/" + itemname, ItemVO.class);
-		} catch (RestClientException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-		return item;
-	}
+	 
+	@RequestMapping(value="/service2/items/{itemname}" , method=RequestMethod.GET)
+	public ItemVO getItems(@PathVariable String itemname);
 
 }
